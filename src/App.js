@@ -1,14 +1,14 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import productList from './pages/productList';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
-    <Switch>
+      <Switch>
         <Route path="/" component={ productList } exact />
-    </Switch>
+      </Switch>
     </BrowserRouter>
   );
 }
