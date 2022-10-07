@@ -8,6 +8,7 @@ class productList extends React.Component {
     super();
     this.state = {
       categoryList: [],
+      // categoryId: '',
       querry: '',
       productResults: [],
     };
@@ -40,6 +41,15 @@ class productList extends React.Component {
     });
   };
 
+  handleClickCategory = async (categoryId) => {
+    // const { categoryId } = this.state;
+    const productArray = await getProductsFromCategoryAndQuery(categoryId, '');
+    const productResults = productArray.results;
+    this.setState({
+      productResults,
+    });
+  };
+
   render() {
     const { categoryList, querry, productResults } = this.state;
     return (
@@ -48,7 +58,10 @@ class productList extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoryList categoryList={ categoryList } />
+        <CategoryList
+          categoryList={ categoryList }
+          handleClickCategory={ this.handleClickCategory }
+        />
 
         <label htmlFor="query-input">
           <input

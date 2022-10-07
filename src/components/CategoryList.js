@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
   render() {
-    const { categoryList } = this.props;
+    const { categoryList, handleClickCategory } = this.props;
     return (
       <aside>
         <ul>
@@ -12,6 +12,7 @@ class CategoryList extends React.Component {
               key={ category.id }
               type="button"
               data-testid="category"
+              onClick={ () => handleClickCategory(category.id) }
             >
               {category.name}
             </button>
@@ -23,7 +24,8 @@ class CategoryList extends React.Component {
 }
 
 CategoryList.propTypes = {
-  categoryList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-};
+  categoryList: PropTypes.arrayOf(PropTypes.shape({})),
+  handleClickCategory: PropTypes.func,
+}.isRequired;
 
 export default CategoryList;
