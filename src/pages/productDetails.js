@@ -19,6 +19,18 @@ class productDetails extends React.Component {
       });
   }
 
+  addToCart = (productObject) => { // Refatorar no futuro para evitar repetição de função productList x productDetails
+    // const { cartItems } = this.state;
+    const { title, thumbnail, price, id } = productObject;
+    let currentList = [];
+    if (localStorage.getItem('cartItems')) {
+      currentList = JSON.parse(localStorage.getItem('cartItems'));
+    }
+    const newObj = { id, title, thumbnail, price, quantity: 1 };
+    const newArray = [...currentList, newObj];
+    localStorage.setItem('cartItems', JSON.stringify(newArray));
+  };
+
   render() {
     const { productObject } = this.state;
     const { title, thumbnail, price } = productObject;
@@ -28,6 +40,13 @@ class productDetails extends React.Component {
         <p data-testid="product-detail-price">{ `R$ ${price}` }</p>
         <img data-testid="product-detail-image" src={ thumbnail } alt={ title } />
         <Link to="/carrinho" data-testid="shopping-cart-button">Carrinho de compras</Link>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => this.addToCart(productObject) }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
