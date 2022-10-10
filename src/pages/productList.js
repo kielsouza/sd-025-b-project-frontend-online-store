@@ -50,6 +50,18 @@ class productList extends React.Component {
     });
   };
 
+  addToCart = (item) => { // Refatorar no futuro para evitar repetição de função productList x productDetails
+    // const { cartItems } = this.state;
+    const { title, thumbnail, price, id } = item;
+    let currentList = [];
+    if (localStorage.getItem('cartItems')) {
+      currentList = JSON.parse(localStorage.getItem('cartItems'));
+    }
+    const newObj = { id, title, thumbnail, price, quantity: 1 };
+    const newArray = [...currentList, newObj];
+    localStorage.setItem('cartItems', JSON.stringify(newArray));
+  };
+
   render() {
     const { categoryList, querry, productResults } = this.state;
     return (
@@ -97,6 +109,13 @@ class productList extends React.Component {
                 >
                   Detalhes
                 </Link>
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  onClick={ () => this.addToCart(item) }
+                >
+                  Adicionar ao carrinho
+                </button>
               </div>
             ))
           }
