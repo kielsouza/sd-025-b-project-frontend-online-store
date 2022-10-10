@@ -13,10 +13,10 @@ class carrinhoDeCompras extends React.Component {
     this.getCartItems();
   }
 
-  getCartItems = async () => {
+  getCartItems = () => {
     if (localStorage.getItem('cartItems')) {
       const getLocal = localStorage.getItem('cartItems');
-      const cartLista = await JSON.parse(getLocal);
+      const cartLista = JSON.parse(getLocal);
       this.setState({
         cartList: cartLista,
         length: true,
