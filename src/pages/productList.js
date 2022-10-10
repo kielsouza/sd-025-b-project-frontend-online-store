@@ -91,6 +91,12 @@ class productList extends React.Component {
                   R$:
                   {item.price}
                 </p>
+                <Link
+                  to={ `detalhes/${item.id}` }
+                  data-testid="product-detail-link"
+                >
+                  Detalhes
+                </Link>
               </div>
             ))
           }
